@@ -1,0 +1,28 @@
+[package]
+name = "uxnknwn/jecs-util"
+description = "Reusable utilities for Jecs 0.11 and Roblox ECS projects"
+version = "0.1.0-alpha.1"
+license = "MIT"
+authors = ["Dale Harris IV"]
+realm = "shared"
+registry = "https://github.com/UpliftGames/wally-index"
+repository = "https://github.com/uxnknwn/jecs_util"
+
+exclude = [
+  ".pesde",
+  "luau_packages",
+  "lune_packages",
+  "roblox_packages",
+  "tests.toml",
+  "selene_definitions.yml",
+  "pesde.lock",
+  "pesde.toml",
+  "test.project.json",
+  "tests",
+  "selene.toml",
+  "stylua.toml",
+  "scripts",
+]
+
+[dependencies]
+Jecs = "ukendio/jecs@0.11.0"

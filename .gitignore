@@ -1,0 +1,14 @@
+.pesde/
+luau_packages/
+lune_packages/
+Packages/
+DevPackages/
+build/
+sourcemap.json
+roblox_packages/
+*.rbxl
+*.rbxlx
+*.rbxm
+*.rbxmx
+scripts/
+pesde.lock

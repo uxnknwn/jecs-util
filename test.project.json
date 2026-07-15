@@ -1,0 +1,26 @@
+{
+  "name": "jecs_util_tests",
+  "tree": {
+    "$className": "DataModel",
+
+    "ServerScriptService": {
+      "run_tests": {
+        "$path": "tests/run_tests.server.luau"
+      }
+    },
+
+    "ReplicatedStorage": {
+      "jecs_util": {
+        "$path": "src"
+      },
+
+      "Tests": {
+        "$path": "tests"
+      },
+
+      "roblox_packages": {
+        "$path": "roblox_packages"
+      }
+    }
+  }
+}
