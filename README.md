@@ -16,7 +16,7 @@ This package targets Jecs `0.11.0` only.
 
 ```toml
 [dependencies]
-jecs-util = "uxnknwn/jecs-util@0.1.0"
+jecs-util = "uxnknwn/jecs-util@0.1.0-alpha.2"
 Jecs = "ukendio/jecs@0.11.0"
 ```
 
