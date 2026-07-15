@@ -52,4 +52,4 @@ if #failures > 0 then
 	error(table.concat(failures, "\n"), 0)
 end
 
-print("jecs_util tests passed")
+print("jecs-util tests passed")

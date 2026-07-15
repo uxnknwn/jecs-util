@@ -10,7 +10,7 @@
     },
 
     "ReplicatedStorage": {
-      "jecs_util": {
+      "jecs-util": {
         "$path": "src"
       },
 

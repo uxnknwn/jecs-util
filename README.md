@@ -1,4 +1,4 @@
-# jecs_util
+# jecs-util
 
 Small utilities for Jecs 0.11.0 and Roblox ECS projects.
 
@@ -16,7 +16,7 @@ This package targets Jecs `0.11.0` only.
 
 ```toml
 [dependencies]
-jecs_util = "uxnknwn/jecs-util@0.1.0"
+jecs-util = "uxnknwn/jecs-util@0.1.0"
 Jecs = "ukendio/jecs@0.11.0"
 ```
 
@@ -32,6 +32,8 @@ wally install
 pesde add uxnknwn/jecs_util
 ```
 
+Pesde currently requires the underscore form in the package id, so the published Pesde name stays `uxnknwn/jecs_util`.
+
 The package depends on Jecs `0.11.0`.
 
 ## Import
@@ -40,7 +42,7 @@ Use your project’s actual dependency paths:
 
 ```luau
 local jecs = require(path.to.jecs)
-local jecs_util = require(path.to.jecs_util)
+local jecsUtil = require(path.to["jecs-util"])
 ```
 
 The exact Instance names can vary with dependency aliases.
@@ -51,7 +53,7 @@ The exact Instance names can vary with dependency aliases.
 
 ```luau
 local world = jecs.World.new()
-local registry = jecs_util.registry.new(world)
+local registry = jecsUtil.registry.new(world)
 
 local entity = world:entity()
 registry:Define("Players", 12345, entity)
@@ -75,7 +77,7 @@ registry:Clear()
 
 ```luau
 local event = Instance.new("BindableEvent")
-local pop, connection = jecs_util.collect(event.Event)
+local pop, connection = jecsUtil.collect(event.Event)
 
 event:Fire("RoundStarted", 10)
 event:Fire("RoundEnded", 20)

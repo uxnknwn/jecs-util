@@ -4,7 +4,8 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local robloxPackages = ReplicatedStorage:WaitForChild("roblox_packages")
 local Jecs = require(robloxPackages:WaitForChild("jecs"))
-local registryModule = require(ReplicatedStorage:WaitForChild("jecs_util")).registry
+local jecsUtil = require(ReplicatedStorage:WaitForChild("jecs-util"))
+local registryModule = jecsUtil.registry
 
 type Describe = (name: string, callback: () -> ()) -> ()
 type It = (name: string, callback: () -> ()) -> ()

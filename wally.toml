@@ -1,12 +1,12 @@
 [package]
 name = "uxnknwn/jecs-util"
 description = "Reusable utilities for Jecs 0.11 and Roblox ECS projects"
-version = "0.1.0-alpha.1"
+version = "0.1.0-alpha.2"
 license = "MIT"
 authors = ["Dale Harris IV"]
 realm = "shared"
 registry = "https://github.com/UpliftGames/wally-index"
-repository = "https://github.com/uxnknwn/jecs_util"
+repository = "https://github.com/uxnknwn/jecs-util"
 
 exclude = [
   ".pesde",

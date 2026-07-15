@@ -1,8 +1,8 @@
 name = "uxnknwn/jecs_util"
-version = "0.1.0-alpha.1"
+version = "0.1.0-alpha.2"
 description = "Reusable utilities for Jecs 0.11 and Roblox ECS projects"
 authors = ["Dale Harris IV"]
-repository = "https://github.com/uxnknwn/jecs_util"
+repository = "https://github.com/uxnknwn/jecs-util"
 license = "MIT"
 
 [target]
