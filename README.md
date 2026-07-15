@@ -1,6 +1,6 @@
 # jecs_util
 
-Reusable utilities for Jecs 0.11 and Roblox ECS projects.
+Small utilities for Jecs 0.11.0 and Roblox ECS projects.
 
 ## Requirements
 
@@ -8,13 +8,11 @@ Reusable utilities for Jecs 0.11 and Roblox ECS projects.
 - Luau
 - Jecs `0.11.0`
 
-This package specifically targets Jecs `0.11.0`.
+This package targets Jecs `0.11.0` only.
 
 ## Installation
 
 ### Wally
-
-Add the package to `wally.toml`:
 
 ```toml
 [dependencies]
@@ -30,130 +28,90 @@ wally install
 
 ### Pesde
 
-Install the package:
-
 ```bash
 pesde add uxnknwn/jecs_util
 ```
 
 The package depends on Jecs `0.11.0`.
 
-## Usage
+## Import
+
+Use your project’s actual dependency paths:
 
 ```luau
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-local Packages = ReplicatedStorage.Packages
-
-local jecs = require(Packages.Jecs)
-local JecsUtil = require(Packages.jecs_util)
+local jecs = require(path.to.jecs)
+local jecs_util = require(path.to.jecs_util)
 ```
 
-The exact installed Instance names may depend on dependency aliases in the consuming project.
+The exact Instance names can vary with dependency aliases.
 
-## registry
+## Registry
 
-Create a Jecs 0.11 world and registry:
+`registry` maps a category and key to a Jecs entity.
 
 ```luau
 local world = jecs.World.new()
-local registry = JecsUtil.registry.new(world)
-```
+local registry = jecs_util.registry.new(world)
 
-Create and register an entity:
-
-```luau
 local entity = world:entity()
-
 registry:Define("Players", 12345, entity)
 ```
 
-Retrieve it:
+Basic operations:
 
 ```luau
-local playerEntity = registry:Get("Players", 12345)
+local entity = registry:Get("Players", 12345)
+local exists = registry:Has("Players", 12345)
+local removed = registry:Undefine("Players", 12345)
 
-if playerEntity ~= nil then
-	print("Found entity:", playerEntity)
-end
-```
-
-Check whether it exists:
-
-```luau
-if registry:Has("Players", 12345) then
-	print("Player entity exists")
-end
-```
-
-Remove the mapping without deleting the Jecs entity:
-
-```luau
-local removedEntity = registry:Undefine("Players", 12345)
-```
-
-Remove the mapping and delete the Jecs entity:
-
-```luau
 registry:Delete("Players", 12345)
-```
-
-Delete every registered entity in one category:
-
-```luau
 registry:Clear("NPCs")
-```
-
-Delete every entity registered in the registry:
-
-```luau
 registry:Clear()
 ```
 
-## collect
+## Collect
 
-Queue values from a Roblox signal:
+`collect` turns a Roblox signal into a FIFO queue.
 
 ```luau
 local event = Instance.new("BindableEvent")
-
-local pop, connection = JecsUtil.collect(event.Event)
+local pop, connection = jecs_util.collect(event.Event)
 
 event:Fire("RoundStarted", 10)
+event:Fire("RoundEnded", 20)
 
-local eventName, duration = pop()
+local function processEvents()
+	while true do
+		local eventName, duration = pop()
 
-print(eventName, duration)
+		if eventName == nil then
+			break
+		end
+
+		print("event:", eventName, duration)
+	end
+end
+
+processEvents()
 
 connection:Disconnect()
 event:Destroy()
 ```
 
-Events are returned in order:
-
-```luau
-event:Fire("First")
-event:Fire("Second")
-
-print(pop())
-print(pop())
-```
-
-Nil arguments are preserved:
+Trailing `nil` values are preserved:
 
 ```luau
 event:Fire("A", nil, "C", nil)
 
 local result = table.pack(pop())
-
-print(result.n)
+print(result.n) -- 4
 ```
 
 ## API
 
 ### `registry.new(world)`
 
-Creates an independent registry using a Jecs 0.11-compatible world.
+Creates an independent registry using a Jecs-compatible world.
 
 ### `registry:Define(category, key, entity)`
 
@@ -173,7 +131,7 @@ Removes and returns a mapping without deleting the entity.
 
 ### `registry:Delete(category, key)`
 
-Removes the mapping and deletes the entity from the Jecs world.
+Removes the mapping and deletes the entity from the world.
 
 ### `registry:Clear(category?)`
 
@@ -181,7 +139,7 @@ Deletes one category or every registered entity.
 
 ### `collect(signal)`
 
-Returns a FIFO queue pop function and the signal connection.
+Returns a FIFO `pop` function and the signal connection.
 
 ## License
 

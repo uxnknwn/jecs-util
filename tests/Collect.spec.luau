@@ -1,7 +1,7 @@
 --!strict
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local JecsUtil = require(ReplicatedStorage:WaitForChild("jecs_util"))
+local jecs_util = require(ReplicatedStorage:WaitForChild("jecs_util"))
 
 type Describe = (name: string, callback: () -> ()) -> ()
 type It = (name: string, callback: () -> ()) -> ()
@@ -14,7 +14,7 @@ return function(describe: Describe, it: It)
 	describe("Collect", function()
 		it("returns a pop function and connection", function()
 			local event = Instance.new("BindableEvent")
-			local pop, connection = JecsUtil.collect(event.Event)
+			local pop, connection = jecs_util.collect(event.Event)
 
 			check(type(pop) == "function", "expected pop function")
 			check(connection ~= nil, "expected connection")
@@ -25,7 +25,7 @@ return function(describe: Describe, it: It)
 
 		it("returns nil when empty", function()
 			local event = Instance.new("BindableEvent")
-			local pop, connection = JecsUtil.collect(event.Event)
+			local pop, connection = jecs_util.collect(event.Event)
 
 			check(pop() == nil, "expected empty queue")
 
@@ -35,7 +35,7 @@ return function(describe: Describe, it: It)
 
 		it("collects one event", function()
 			local event = Instance.new("BindableEvent")
-			local pop, connection = JecsUtil.collect(event.Event)
+			local pop, connection = jecs_util.collect(event.Event)
 
 			event:Fire("RoundStarted", 10)
 			task.wait()
@@ -51,7 +51,7 @@ return function(describe: Describe, it: It)
 
 		it("collects multiple events in fifo order", function()
 			local event = Instance.new("BindableEvent")
-			local pop, connection = JecsUtil.collect(event.Event)
+			local pop, connection = jecs_util.collect(event.Event)
 
 			event:Fire("First")
 			event:Fire("Second")
@@ -67,7 +67,7 @@ return function(describe: Describe, it: It)
 
 		it("removes an event after popping", function()
 			local event = Instance.new("BindableEvent")
-			local pop, connection = JecsUtil.collect(event.Event)
+			local pop, connection = jecs_util.collect(event.Event)
 
 			event:Fire("First")
 			task.wait()
@@ -81,7 +81,7 @@ return function(describe: Describe, it: It)
 
 		it("preserves multiple arguments", function()
 			local event = Instance.new("BindableEvent")
-			local pop, connection = JecsUtil.collect(event.Event)
+			local pop, connection = jecs_util.collect(event.Event)
 
 			event:Fire("A", 1, true)
 			task.wait()
@@ -98,7 +98,7 @@ return function(describe: Describe, it: It)
 
 		it("preserves a nil between values", function()
 			local event = Instance.new("BindableEvent")
-			local pop, connection = JecsUtil.collect(event.Event)
+			local pop, connection = jecs_util.collect(event.Event)
 
 			event:Fire("A", nil, "C")
 			task.wait()
@@ -116,7 +116,7 @@ return function(describe: Describe, it: It)
 
 		it("preserves trailing nil arguments", function()
 			local event = Instance.new("BindableEvent")
-			local pop, connection = JecsUtil.collect(event.Event)
+			local pop, connection = jecs_util.collect(event.Event)
 
 			event:Fire("A", nil, "C", nil)
 			task.wait()
@@ -135,7 +135,7 @@ return function(describe: Describe, it: It)
 
 		it("stops collecting after disconnection", function()
 			local event = Instance.new("BindableEvent")
-			local pop, connection = JecsUtil.collect(event.Event)
+			local pop, connection = jecs_util.collect(event.Event)
 
 			connection:Disconnect()
 			event:Fire("A")
@@ -148,7 +148,7 @@ return function(describe: Describe, it: It)
 
 		it("works with an actual RBXScriptSignal", function()
 			local event = Instance.new("BindableEvent")
-			local pop, connection = JecsUtil.collect(event.Event)
+			local pop, connection = jecs_util.collect(event.Event)
 
 			event:Fire("Signal")
 			task.wait()
