@@ -1,7 +1,7 @@
 [package]
 name = "uxnknwn/jecs-util"
 description = "Reusable utilities for Jecs 0.11 and Roblox ECS projects"
-version = "0.1.0-alpha.2"
+version = "0.1.0-alpha.3"
 license = "MIT"
 authors = ["Dale Harris IV"]
 realm = "shared"
